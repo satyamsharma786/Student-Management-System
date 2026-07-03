@@ -12,9 +12,6 @@ while True:
     print("\n\n")
 
     if(user==1):   
-        print("====Admin Panel====\n")
-        print("1.Add student\n2.View student\n3.Search student\n4.Update Student\n5.Delete Student\n6.Save Student\n7.Exit\n")                      #admin panel menu 
-        ac=int(input("Enter your choice: "))                                                                                                        #admin panel option choice
         print("\n")
         break
         
@@ -33,8 +30,27 @@ while True:
 
 students=[] #declaration of empty list for a number of students
 
+#defining username and passwords for the admin login
+ADMIN_USERNAME="admin"
+ADMIN_PASSWORD="1234"
 
-def add_student():          #function for adding student details
+#function for admin login 
+def admin_login(): 
+    username=input("Enter Username: ")
+    password=input("Enter password: ")
+    
+    if(username==ADMIN_USERNAME and password==ADMIN_PASSWORD):
+        print("Login Successful\n")
+        return True
+    else:
+        print("Access Denied\n")
+        return False
+
+
+
+
+#function for adding student details
+def add_student():   
     while True:
         roll=int(input("Enter Roll no.:  "))
         name=input("Enter name: ")
@@ -56,8 +72,27 @@ def add_student():          #function for adding student details
         ch=input("Do you want to add another student?(Y/N): ")
         if(ch.lower()=="n"):
             break
+
+
+
+
+#function for view student data stored 
+def vs(): 
+    if len(students)==0:
+        print("\n No students found.\n")
+        return
+    
+    print("\n======STUDENT RECORDS FOUND======\n")
+    for student in students:
+        print(f"Roll no. :{student['roll']}")
+        print(f"Name :{student['name']}")
+        print(f"Course :{student['course']}")
+        print(f"Marks :{student['marks']}")
+        print("-"*25)
         
-        
+
+
+       
 while True:
     print("====Admin Panel====\n")
     print("1.Add student\n2.View student\n3.Search student\n4.Update Student\n5.Delete Student\n6.Save Student\n7.Exit\n")                      #admin panel menu 
@@ -66,6 +101,9 @@ while True:
     
     if(ac==1):
         add_student()
+    
+    elif(ac==2):
+        vs()    
         
     elif(ac==7):
         break
